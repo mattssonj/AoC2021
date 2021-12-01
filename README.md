@@ -1,60 +1,61 @@
-# Exempelrepo för Cygnifierad Advent of Code
-Detta repo är ett exempel på hur du bör strukturera ditt repo för att dina lösningar på [Advent of Code](https://adventofcode.com/) ska kunna analyseras på ett korrekt sätt av den [Cygnifierade varianten](https://cygni.github.io/aoc).
-
-## Katalogstruktur
-Varje dags lösningar måste placeras i en katalog med motsvarande namn; `day01`, `day02`, ..., `day25`. Det finns ett hjälpskript du kan använda för att generera katalogstrukturen: `create_directories.sh`
-
-## Dockerfile för att mäta exekveringstid
-För att vi ska kunna mäta exekveringstid behöver varje dags lösning placeras i en Dockerfile. Denna bör innehålla ett CMD som triggar start av lösningen. Vi mäter nämligen exekveringstiden genom följande.
-
+# Advent of Code 2021
+```                .,,,...                            :$L ;$  ,dP
+            ,!!!!!!!',cd$$$$$e,                 q  4$f,$$,z$"
+          ,!!!!!!!',c$$$$$$$$$$$$c              `$o`$$kuC3$$ .zf
+        ,!!!!!!!',c$$$$$$P**""**?$c              R$beeF?$$$$$"
+       ;!!!!!!! c$$$$$$",eed$$F"?t"               "$$$$bd$$$"
+      ;!!!!!!!.d$$$$$F j"j$3$bf""?b?e,             '$$$$$$P"
+     !!!!!!:  $$$$$$P J,f ,d$$b?$bde`$c          .$k<?????>'$b
+     !!!!!!!$$$$F".$$".u$$??P}"""^ ?$$c.       d$$$$$dd$$$$$>
+      `!!!!!  ?L e$$ $$$$$P'zee^"$$$$boc"$$,     R$$$$$$$$$$$$
+       '!!!   z$$$$$c,"$P'd$$F'zdbeereee$$$$$eu    "??$$$$PF"
+Mn      !!   d$$$$$$$$ee z$P",d$$$$$$c?$$$$$$$$C  '!!!::::!!!>
+MMM   ,cec, '^$$$$$$$$$c,",e$$C?$$$$$$bc?$$$$$$$k !!!!!!!!!!!!
+MMM'.$$$$$$$, ?$$$$$$$$P$$$$$$$bc?T$$$$$$d$$$$$$$ . -.`!!!!!!!
+nMM d$$$$$$$F  $$P???",e4$$$$$$$$bcc?$$$$$$$$$$$$ /~:.!!!!!!!!!
+n.  "$$$$$$$'   ::,"??e,.-.?$$$$$$$$$$$$$$$$$$$$F.C"m.`!!!!!!!'
+M":!:`"""""   :!!!!!!i:."?o. "? ?$$$??$$$"$$F"$P<$$$b/4.`4!!!
+: 4!!!!h     <!!!!!!!!!!:  .CL.F'.zeElu. : ?eb o$$$$$$o(#c'`
+  '`~!!~.ud !!````'!''``zd$$$$$`d$$$CuuJ" !: 4$$$$$$$$$$c"$c
+." !~`z$$$":!!!~`..:i! d$$$$$$$`$$$$FCCJ" !!!: ?$$$$$$$$$b $L
+$$"z$$$$$":!!! :!!!!!'4$$$$$$$$`$$$$$" "" !!!!!:`$$$$$$$$$$ "
+?o$$$$$$F !!!!!!!!!!! 4$$$$$$$$;?$P": JL \.~!!!!i $$$$P?"l.u-
+$$$$$$$$F!!!!!!!!!!!!:'R$$$$$$$E.:! $.$$c3$%:`!!! .l==7Cuec^ <
+$$$$$$$$ !!!!!!!!!!!!!i ?$$$$P"<!!! ?$`$$$$N.     Rk`$$$$$$r\
+$$$$$$$$L`!!!!!!!!!!!!!!! .:::!!!''`   $$$$$$      $c"??"7u+? !
+$$$$$$$$$ !!!!!!!!!!!'` :!!''`         '""        .'?b"l.4d$ !!!:
+$$$$$$$$$b `!!!'''`.. '''`               ...:::!!!!!! $$$.?$b'!!!>
+$$$$$$$$$$$beee@$$$$$$$$        ..:::!!!!!!!!!!!!!!!! 3$$b ?$c`!!!
+$$$$$$$$$$$$$$$$$$$$$$$f .::!!!!!!!!!!!!!!!!!!!!!!!!! d$$$$`$$b !!!
+$$$$$$$$$$$"3$$$$$$$$$":!!!!!!!!!!!!!!!!!!!!!!!!!!!!! $$$$$,$$$k !!!
+$$$$$$$$$P,d$$$$$$$$F !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 3$$$$$ $$$i`!!! 3>
+$$$$$$F$Fz$$$$$$$$$$ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! d$$$$$h`$$$,!!! $&
+$$$$$FJFx$$$$$$$$$$ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'4$$$$$$$ 9$$$.'.$$$L
+$$$$$ F.$$$$$$$$F.r !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! $$$$$$$F  ?$$$e$$$$F
+$$$$F .$$$$$$$$"d$$bu,,.```''!!!!!!!!!!!!!!!!'''''`,d$$$$$$$F.! ?$$$$$$F
+$$$$F d$$$$$$$$ $$$$$$$$$$$bc,,,,,,,,,,,,,,,,ccd$$$$$$$$$$$$ !!f ?$$$$"
+ "$$$e$$$$$$$$&'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ !! $P"
+   `"?$$$$$$$$$e`?$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ !!'
+      `?$$$$$$$$$$e `""**???$$$$$$$$$$$$$$$$$$$$$$$P***""..:!!'
+         "?$$$$$$$$k`!!!!!!;;;;;;::,,,...... ,,,,,;;!!!!!!!!!!
+             ""???"" !!!!!!!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!:
+                      !!!!!!!!!!!!!!!!!!!'   !!!!!!!!!!!!!!!!!!
+                       !!!!!!!!!!!!!!!!.   `!!!!!!!!!'''!!!!'
+                     :i !!!!!!!!!!!!!!!!   .``''`.,uu,,.```.
+                     !!!!!!!!!!!!!!!!!~`    d$$$$$$$$$$$$$$$$$>
+                    c.`~~~~~!!!!!:..        $$$$$$$$$$$$$$$$$$
+                    $$$$$eeeeeeeuuuee$      $$$$$$$$$$$$$$$$$"
+                    $$$$$$$$$$$$$$$$$$       """"...........
+                    ?$$$$$$$$$$$$$$$P"       '!!!!!!!!!!!!!!
+                      .."""""""""".:          !!!!!!!!!!!!!
+                     :!!!!!!!!!!!!!!          `!!!!!!!!!!!'
+                     i!!!!!!!!!!!!!'          !!!!!!!!!!!'::
+                     :!!!!!!!!!!!!!           !!!!!!!!!!:!!:.
+                     !!!!!!!!!!'!!!           . `!!!!!!!!!!!!`...
+                     `!!!!!!!! -'``           !!!!!!!!!!!!!!!!!!!!!::
+                      !!!!!!!!!i!!!:           `~~~~~```~~~~~~~~~~~~`
+                      !!!!!!!!!!!!!!!.
+                        ```'!!!!!!!'``::..
+                              `!!!!!!!!!!!'
+                                 `````
 ```
-$ time docker run -e part=part1 "${dockerImage}"
-```
-
-### Miljövariabel för de två delmomenten
-Som du ser i exemplet ovan hur exekveringstiden mäts så anges en miljövariabel `part`. Varje dags problem under Advent of Code har två nivåer part1 och part2. Se exempeldagarna i detta repo för att se hur du kan lösa detta. Det viktiga för att det ska kunna mätas är just att miljövariabeln kan sättas vid uppstart av dockercontainern för part1.
-
-```
-$ time docker run -e part=part1 "${dockerImage}"
-```
-
-Och för part2.
-```
-$ time docker run -e part=part2 "${dockerImage}"
-```
-
-## Innhåll för respektive exempeldag
-
-### Day 01
-Java with Gradle
-
-### Day 02
-Node with yarn
-
-### Day 03
-Go
-
-### Day 04
-Python
-
-### Day 05
-C
-
-### Day 06 
-R
-
-### Day 07
-Rust
-
-### Day 08
-.NET Core 5.0
-
-### Day 09
-Haskell
-
-### Day 10
-Lisp
-
-### Day 11
-Scheme
-
